@@ -85,6 +85,14 @@ function setup_autostart() {
     echo_msg "Auto-Start wurde eingerichtet."
 }
 
+# Lade die start.sh-Datei von GitHub herunter und gebe die Ausführungsrechte
+function download_start_script() {
+    echo_msg "Lade start.sh von GitHub herunter..."
+    curl -o "$INSTALL_DIR/start.sh" https://raw.githubusercontent.com/csgamingtv2024/Discord_Bots/refs/heads/main/start.sh
+    chmod +x "$INSTALL_DIR/start.sh"  # Setze die Berechtigungen für die Ausführung
+    echo_msg "start.sh wurde heruntergeladen und ist jetzt ausführbar."
+}
+
 # Hauptfunktion
 function main() {
     echo_msg "Starte die Installation..."
@@ -110,6 +118,7 @@ function main() {
     install_python_requirements
     create_env_file
     setup_autostart
+    download_start_script  # Lade start.sh herunter
 
     echo_msg "Installation abgeschlossen! Du kannst den Bot mit './start.sh' starten."
 }
