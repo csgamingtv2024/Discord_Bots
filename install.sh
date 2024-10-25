@@ -75,7 +75,7 @@ function setup_autostart() {
     {
         echo "[Desktop Entry]"
         echo "Type=Application"
-        echo "Exec=python3 $INSTALL_DIR/discord_bot.py"  # Passe den Skriptnamen an
+        echo "Exec=python3 $INSTALL_DIR/bot.py"  # Passe den Skriptnamen an
         echo "Hidden=false"
         echo "NoDisplay=false"
         echo "X-GNOME-Autostart-enabled=true"
