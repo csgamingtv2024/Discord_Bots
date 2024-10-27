@@ -44,7 +44,7 @@ function install_screen() {
 # Installiere die erforderlichen Python-Pakete
 function install_python_requirements() {
     echo_msg "Installiere erforderliche Python-Pakete..."
-    pip install discord.py yt-dlp spotipy python-dotenv PyNaCl  # Füge PyNaCl hinzu
+    pip install -r requirements.txt
 }
 
 # Erstelle die .env-Datei
@@ -54,11 +54,15 @@ function create_env_file() {
     read -p "Gib deinen Discord-Token ein: " DISCORD_TOKEN
     read -p "Gib deine Spotify Client ID ein: " SPOTIFY_CLIENT_ID
     read -p "Gib dein Spotify Client Secret ein: " SPOTIFY_CLIENT_SECRET
+    read -p "Gib die ID des Discord-Kanals ein: " CHANNEL_ID
+    read -p "Gib die ID der erlaubten Rolle ein: " ALLOWED_ROLE_ID
 
     {
         echo "DISCORD_TOKEN=$DISCORD_TOKEN"
         echo "SPOTIFY_CLIENT_ID=$SPOTIFY_CLIENT_ID"
         echo "SPOTIFY_CLIENT_SECRET=$SPOTIFY_CLIENT_SECRET"
+        echo "CHANNEL_ID=$CHANNEL_ID"
+        echo "ALLOWED_ROLE_ID=$ALLOWED_ROLE_ID"
     } > "$INSTALL_DIR/.env"  # Erstelle die .env-Datei im Installationsverzeichnis
 
     echo_msg ".env-Datei wurde erstellt."
@@ -115,6 +119,9 @@ function main() {
     echo_msg "Erstelle die virtuelle Umgebung..."
     python3 -m venv myenv  # Erstelle die virtuelle Umgebung
     source myenv/bin/activate  # Aktiviere die virtuelle Umgebung
+
+    # Installiere die Python-Anforderungen
+    echo_msg "Installiere erforderliche Python-Pakete..."
     install_python_requirements
     create_env_file
     setup_autostart
